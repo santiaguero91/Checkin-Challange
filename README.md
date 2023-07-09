@@ -1,9 +1,7 @@
-# Postulacion-simulación-check-in-Bsale
-Ejercicio de aplicación de simulación de check-in de aerolíneas - para BSALE
+# Simulación-check-in-deAeropuerto
+Este es un ejercicio de API Rest para la aplicación de simulación de check-in de aerolíneas - realizado utilizando JavaScript, Express y prisma.
 
-Este es un ejercicio de API Rest para la aplicación de simulación de check-in de aerolíneas - para BSALE en JavaScript con Express.
-
-### Instalar
+### Instalcion
 
 ```bash
 npm install
@@ -20,6 +18,8 @@ npm start
 Para que funcione se debe usar la url donde está desplegado el proyecto y agregar la siguiente ruta:
 
 **/flights/:id/passengers**
+
+siendo : id un numero del 1 al 4
 
 ## Formato de respuesta
 
@@ -55,7 +55,7 @@ La API devuelve respuestas en formato JSON. A continuación se presentan algunos
 }
 ```
 
-### Vuelo no encontrado:
+### En caso de no encontrar un vuelvo con la id indicada:
 
 ```json
 {
