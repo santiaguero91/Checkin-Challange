@@ -7,21 +7,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model airplane {
-  airplane_id Int      @id @default(autoincrement())       //id String @id @default(uuid())
-  name        String   
-  seat        seat[]
+model passenger {
+  passenger_id Int @id @default(autoincrement()) 
+  dni String  //@id @default(uuid()) //@unique 
+  name String
+  age Int
+  country String
+  boarding_pass boarding_pass[]
 }
 
-model boarding_pass {
-  boarding_pass_id Int       @id @default(autoincrement())
-  purchase_id      Int
-  passenger_id     Int
-  seat_type_id     Int
-  seat_id          Int?
-  flight_id        Int  
-  passenger        passenger @relation(fields: [passenger_id], references: [passenger_id])
+model boarding_pass{
+boarding_pass_id  Int  @id @default(autoincrement()) 
+purchase_id Int
+passenger_id Int
+seat_type_id Int
+seat_id Int?  // ? = allownull
+flight_id Int 
+passenger passenger @relation(fields: [passenger_id], references: [passenger_id])
 }
+
 
 model flight {
   flight_id         Int             @id @default(autoincrement())
@@ -32,15 +36,6 @@ model flight {
   airplane_id       Int
 }
 
-model passenger {
-  passenger_id    Int             @id @default(autoincrement())
-  dni             String          
-  name            String          
-  age             Int
-  country         String        
-  boarding_pass   boarding_pass[] 
-}
-
 
 model seat {
   seat_id       Int             @id @default(autoincrement())
@@ -48,6 +43,10 @@ model seat {
   seat_row      Int
   seat_type_id  Int
   airplane_id   Int
-  airplane      airplane        @relation(fields: [airplane_id], references: [airplane_id])
 }
+
+
+// timesStamps
+//  createdAt    DateTime    @default(now())
+//  updatedAt    DateTime    @updatedAt
 

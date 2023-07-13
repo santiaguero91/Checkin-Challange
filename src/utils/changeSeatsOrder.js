@@ -1,34 +1,30 @@
   const changeSeatsOrder = async (allSeats) => {
 
-    // Sort the seats array by seat_row
+    // Ordena los asientos en base a su seat_row
     allSeats.sort(function(a, b) {
       return a.seat_row - b.seat_row;
     });
   
-    // Group the seats by seat_row
+    // Arma varios grupos en base a su seat_row
     const seatGroups = {};
     let currentRow = allSeats[0].seat_row;
     let currentGroup = [];
-  
+
     for(let i = 0; i < allSeats.length; i++) {
       if(allSeats[i].seat_row !== currentRow) {
-        // Change in row, add current group to seatGroups
+      // Al cambiar la fila , añade el grupo que tiene y lo invierte
         seatGroups[currentRow] = currentGroup;
-        // Reverse current group
         currentGroup = currentGroup.reverse();
-        // Start new group for next row
+        // Comienza un nuevo grupo en la siguiente fila
         currentGroup = [...currentGroup, allSeats[i]];
         currentRow = allSeats[i].seat_row;
       } else {
         currentGroup = [...currentGroup, allSeats[i]];
       }
     }
-    
-    // Add the last group to seatGroups
+    // añade el ultimo grupo y los devuelve como un solo array
     seatGroups[currentRow] = currentGroup.reverse();
-    
-    // Create a single array with all seats in increasing row order
-    const result = [];
+        const result = [];
     for (const row in seatGroups) {
       result.push(...seatGroups[row]);
     }
